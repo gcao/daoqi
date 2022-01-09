@@ -1,0 +1,71 @@
+main frame
+[channels] -> open channels frame
+
+channels frame
+left          right
+channel list  players in channel
+(joined channel in BOLD)
+(double click join and open channel frame)
+
+[refresh] [create channel] channel name _______
+
+channel frame
+left          right
+message pane  players in channel
+[refresh] [send] _____________________________
+
+
+==== help channel ====
+Usage: channel [number] [title]
+  Channels are a forum, or meeting place, where people are able to gather
+  and communicate with each other. Channels should also be used for group
+  discussions on a particular topic, rather than using the 'shout' command.
+  You can only enter one channel at a time, and communicate only with
+  members in the channel you have entered. All channels have a number, and
+  some may have a 'title'. The available channel numbers are 1 - 98.
+  *NOTE*   For using the channels, see:   help yell
+
+     To see all the active channels, enter:   channel
+
+  To give a 'channel' a 'title', you must be in the channel you wish to
+  give a 'title'.  For example, if you are in channel 33, enter:
+
+                   channel 33 title Discussion On 'Atropa belladonna'
+
+  To enter a channel, create a new channel, talk to members in a channel,
+  or exit from a channel, use the 'yell' command.    See:   help yell
+
+  channel 1 is reserved for players with a 'p' (professional) rank.
+
+See also:  shout tell toggle yell who
+
+==== help yell ====
+Usage: yell \[number] <message>
+
+  'yell' can be used for 3 purposes:
+     1) create a new channel     *NOTE*   See:   help channel
+     2) enter a channel  (The valid 'channel' numbers are 1 - 98)
+     3) send messages only to members of the same 'channel' as you.
+
+        a) To do either (1), or (2), enter:   yell \number
+        b) To do (3), enter:   yell <your message>
+        c) To EXIT from a channel, enter:  yell \-1
+        d) 'yell' can be shortened to:  ;
+
+    Examples:
+     #> ; \23               <-- to enter or create a new channel
+     #> ; \23 hello all     <-- sends 'hello all' to members in channel 23
+     #> ; hello all         <-- once in a channel, you may delete the number
+     #> 23 till: hello all  <-- this is what the members in channel 23 see:
+                                  (channel number and who sent the message)
+     #> ; \-1               <-- to EXIT from a channel
+         ^--------------------- Note the space after the ';'.
+
+See also: channel say shout tell who
+
+==== channels ====
+9 #1 Title: Professional Channel -- Open
+9 #23 Title: (dqdqapollo) 第一届棋人道棋邀请赛
+9 #23  dqdqapollo dqdqcaogl
+
+==== channel 23 title 第一届棋人道棋邀请赛 ====

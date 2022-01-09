@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<pomVersion>3</pomVersion>
+	<artifactId>daoqi</artifactId>
+	<name>daoqi</name>
+	<groupId>daoqi</groupId>
+	<currentVersion>1.0</currentVersion>
+	<organization/>
+	<inceptionYear>2004</inceptionYear>
+	<logo>/images/logo.gif</logo>
+	<repository/>
+	<mailingLists>
+		<mailingList>
+			<name>${pom.name} Dev List</name>
+		</mailingList>
+		<mailingList>
+			<name>${pom.name} User List</name>
+		</mailingList>
+	</mailingLists>
+	<dependencies>
+		<dependency>
+			<groupId>aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<jar>aspectjrt.jar</jar>
+			<type>jar</type>
+		</dependency>
+	</dependencies>
+	<build>
+		<sourceDirectory>src/java</sourceDirectory>
+		<aspectSourceDirectory>src/aspectj</aspectSourceDirectory>
+		<unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+		<unitTest>
+			<includes>
+				<include>**/*Test.java</include>
+			</includes>
+		</unitTest>
+		<resources>
+			<resource>
+				<directory>src/conf</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+	</build>
+</project>
+

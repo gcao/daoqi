@@ -1,0 +1,28 @@
+!define LANGUAGE "English"
+!define OUTPUT_FILE "DaoqiSetup.exe"
+
+!define PRODUCT_NAME "Daoqi Client"
+!define PRODUCT_SHORT_NAME "Daoqi"
+!define PRODUCT_VERSION "1.10"
+!define PRODUCT_PUBLISHER "Daoqi Players Club"
+!define PRODUCT_WEB_SITE "http://www.daoqigame.com"
+!define PRODUCT_UNINST_ROOT_KEY "HKLM"
+!define PRODUCT_UNINST_KEY "Software\Daoqi\CurrentVersion\Uninstall\${PRODUCT_NAME}"
+
+!define DAOQI_HOMEPAGE "Daoqi Players Club"
+!define DAOQI_HOMEPAGE_URL_FILE "docs\daoqi.url"
+!define DAOQI_USERGUIDE "User Guide"
+!define DAOQI_USERGUIDE_URL_FILE "docs\userguide.url"
+!define DAOQI_BOARD "Daoqi Board"
+!define DAOQI_BOARD_CMD "openboard.exe"
+!define DAOQI_QUICK_LOGIN "Daoqi Quick Login"
+!define DAOQI_QUICK_LOGIN_CMD "quicklogin.exe"
+!define DAOQI_CLIENT "Daoqi Client"
+!define DAOQI_CLIENT_CMD "run.bat"
+!define DAOQI_UNINSTALL "Uninstall Daoqi Client"
+
+!define UNINSTALL_SUCCESS "$(^Name) was successfully removed from your computer."
+!define UNINSTALL_CONFIRM "Are you sure you want to completely remove $(^Name) and all of its components?"
+!define APPLICATION_RUNNING "Installer Found that Application you are trying to remove is running. Close it and try again!"
+
+!include "base.nsi"

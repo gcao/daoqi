@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- $Id: build.xml,v 1.6 2006/03/04 05:40:17 biclinton Exp $ -->
+<project name="daoqi" default="compile" basedir=".">
+	<property name="version" value="1.09"/>
+	<property name="source.dir" value="src/java"/>
+	<property name="conf.dir" value="src/conf"/>
+	<property name="build.dir" value="target"/>
+	<property name="classes.dir" value="${build.dir}/classes"/>
+	<property name="jar.file" value="${build.dir}/${ant.project.name}.jar"/>
+	<property name="applet.jar" value="${build.dir}/${ant.project.name}-applet.jar"/>
+	<property name="bin.dist.file" value="${build.dir}/${ant.project.name}-${version}.zip"/>
+	<property name="src.dist.file" value="${build.dir}/${ant.project.name}-${version}-src.zip"/>
+	<property name="aspectj.version" value="1.2.1"/>
+
+	<path id="proj.classpath">
+		<pathelement location="${classes.dir}"/>
+		<pathelement location="${conf.dir}"/>
+		<pathelement location="lib/blowfish.jar"/>
+		<pathelement location="lib/commons-httpclient.jar"/>
+		<pathelement location="lib/2000d101.jar"/>
+	</path>
+
+	<target name="init">
+		<tstamp/>
+	</target>
+
+	<target name="compile" depends="init">
+		<mkdir dir="${classes.dir}"/>
+		<javac srcdir="${source.dir}"
+		       source="1.3"
+		       target="1.1"
+		       classpathref="proj.classpath"
+		       destdir="${classes.dir}"
+		       debug="on"
+		       deprecation="on"
+		       optimize="on"
+				/>
+	</target>
+
+	<target name="ajc" depends="compile">
+		<taskdef resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties">
+			<classpath>
+				<pathelement location="lib/aspectjtools-{aspect.version}.jar"/>
+			</classpath>
+		</taskdef>
+		<iajc destdir="${classes.dir}"
+		      tagfile="tagfile.txt"
+		      sourceroots="src/aspectj">
+			<!-- declare classes needed to compile the target files -->
+			<classpath>
+				<pathelement location="lib/aspectjrt-{aspect.version}.jar"/>
+			</classpath>
+		</iajc>
+	</target>
+
+	<target name="compile-tests" depends="compile">
+		<condition property="includesPattern" value="**/*Test.java, **/Test*.java">
+			<not>
+				<isset property="classname"/>
+			</not>
+		</condition>
+		<condition property="includesPattern" value="**/${classname}.java">
+			<isset property="classname"/>
+		</condition>
+
+		<javac srcdir="src/test"
+		       source="1.3"
+		       target="1.1"
+		       classpathref="proj.classpath"
+		       destdir="${classes.dir}"
+		       debug="on"
+		       deprecation="on"
+		       includes="${includesPattern}"
+				/>
+	</target>
+
+	<target name="test" depends="compile-tests">
+		<junit printsummary="yes" haltonfailure="yes" haltonerror="yes" fork="yes">
+			<classpath refid="proj.classpath"/>
+			<formatter type="plain" usefile="no"/>
+			<batchtest fork="yes">
+				<fileset dir="test" includes="${includesPattern}"/>
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="run" depends="compile">
+		<java classname="Go" classpathref="proj.classpath" fork="true">
+            		<arg line="-l chinese"/>
+		</java>
+	</target>
+
+	<target name="openboard" depends="compile">
+		<java classname="jagoclient.LocalGo" classpathref="proj.classpath" fork="true">
+            <!--arg line="-l chinese"/-->
+		</java>
+	</target>
+
+	<target name="jar" depends="compile">
+		<delete file="${jar.file}"/>
+		<unjar src="lib/blowfish.jar" dest="${classes.dir}"/>
+		<jar jarfile="${jar.file}">
+			<fileset dir="${classes.dir}" includes="**/*.class"/>
+			<fileset dir="${conf.dir}">
+				<exclude name="**/CVS"/>
+			</fileset>
+			<manifest>
+				<attribute name="Main-Class" value="Go"/>
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="applet-jar" depends="compile">
+		<delete file="${applet.jar}"/>
+		<copy tofile="${classes.dir}\jagoclient\JagoResource.properties" file="src\conf\GoApplet.properties"/>
+		<jar jarfile="${applet.jar}">
+			<fileset dir="${classes.dir}">
+				<include name="GoApplet.class"/>
+				<include name="AppletComponent*.class"/>
+				<include name="jagoclient/StopThread.class"/>
+				<include name="jagoclient/Global.class"/>
+				<include name="jagoclient/GlobalObject.class"/>
+				<include name="jagoclient/TimeoutInputStream.class"/>
+				<include name="jagoclient/board/BoardInterface.class"/>
+				<include name="jagoclient/board/Board.class"/>
+				<include name="jagoclient/board/Action.class"/>
+				<include name="jagoclient/board/Change.class"/>
+				<include name="jagoclient/board/MarkAction.class"/>
+				<include name="jagoclient/board/TreeNode.class"/>
+				<include name="jagoclient/board/LabelAction.class"/>
+				<include name="jagoclient/board/Position.class"/>
+				<include name="jagoclient/board/Field.class"/>
+				<include name="jagoclient/board/SGFTree.class"/>
+				<include name="jagoclient/board/Node.class"/>
+				<include name="jagoclient/board/WoodPaint.class"/>
+				<include name="jagoclient/board/EmptyVirtualRealBoardPaint.class"/>
+				<!--include name="jagoclient/sound/JagoSound.class"/-->
+				<include name="rene/gui/Global.class"/>
+				<include name="rene/util/list/Tree.class"/>
+				<include name="rene/util/list/ListClass.class"/>
+				<include name="rene/util/list/ListElement.class"/>
+				<include name="rene/util/parser/StringParser.class"/>
+				<include name="rene/util/xml/XmlReaderException.class"/>
+				<include name="rene/util/xml/XmlTree.class"/>
+				<include name="jagoclient/JagoResource.properties"/>
+			</fileset>
+			<fileset dir="${conf.dir}">
+				<include name="GoAppletHelp.txt"/>
+			</fileset>
+		</jar>
+	</target>
+
+	<target name="dist" depends="clean,jar">
+		<zip destfile="${bin.dist.file}">
+			<zipfileset dir="bin" prefix="${ant.project.name}">
+				<include name="*.*"/>
+			</zipfileset>
+			<zipfileset dir="${build.dir}" prefix="${ant.project.name}">
+				<include name="${ant.project.name}.jar"/>
+			</zipfileset>
+		</zip>
+		<zip destfile="${src.dist.file}">
+			<zipfileset dir="." prefix="${ant.project.name}" includes="**/*" excludes="${build.dir}"/>
+		</zip>
+	</target>
+
+	<target name="clean" depends="init">
+		<delete dir="${build.dir}"/>
+	</target>
+</project>

@@ -1,0 +1,6 @@
+2006-04-06
+
+Applet related changes:
+In rene/gui/Global.java, check if IsApplet is true, use PropertiesResourceBundle to
+avoid resource bundle loading causes unnecessary connection to the web server and
+performance problem.

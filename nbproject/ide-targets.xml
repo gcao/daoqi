@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir=".." name="daoqi-IDE">
+    <import file="../build.xml"/>
+    <!-- TODO: edit the following target according to your needs -->
+    <!-- (more info: http://www.netbeans.org/kb/41/freeform-config.html#debugj2se) -->
+    <target depends="compile" name="debug-nb">
+        <nbjpdastart addressproperty="jpda.address" name="daoqi" transport="dt_socket"/>
+        <java classname="SimpleMain" classpathref="proj.classpath" fork="true">
+            <!--arg line="-l chinese"/-->
+            <jvmarg value="-Xdebug"/>
+            <jvmarg value="-Xrunjdwp:transport=dt_socket,address=${jpda.address}"/>
+        </java>
+    </target>
+</project>

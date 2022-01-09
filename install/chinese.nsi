@@ -1,0 +1,28 @@
+!define LANGUAGE "SimpChinese"
+!define OUTPUT_FILE "DaoqiSetup.exe"
+
+!define PRODUCT_NAME "道棋对弈程序"
+!define PRODUCT_SHORT_NAME "道棋"
+!define PRODUCT_VERSION "1.10"
+!define PRODUCT_PUBLISHER "道棋爱好者协会"
+!define PRODUCT_WEB_SITE "http://www.daoqigame.com"
+!define PRODUCT_UNINST_ROOT_KEY "HKLM"
+!define PRODUCT_UNINST_KEY "Software\Daoqi\CurrentVersion\Uninstall\${PRODUCT_NAME}"
+
+!define DAOQI_HOMEPAGE "道棋爱好者协会"
+!define DAOQI_HOMEPAGE_URL_FILE "docs\daoqi-cn.url"
+!define DAOQI_USERGUIDE "使用说明"
+!define DAOQI_USERGUIDE_URL_FILE "docs\userguide-cn.url"
+!define DAOQI_BOARD "道棋棋盘"
+!define DAOQI_BOARD_CMD "openboard-cn.exe"
+!define DAOQI_QUICK_LOGIN "道棋快速登录窗口"
+!define DAOQI_QUICK_LOGIN_CMD "quicklogin-cn.exe"
+!define DAOQI_CLIENT "道棋对弈程序"
+!define DAOQI_CLIENT_CMD "run-cn.bat"
+!define DAOQI_UNINSTALL "卸载道棋对弈程序"
+
+!define UNINSTALL_SUCCESS "$(^Name) 已成功地从你的计算机移除。"
+!define UNINSTALL_CONFIRM "你确实要完全移除 $(^Name) ，及其所有的组件？"
+!define APPLICATION_RUNNING "道棋对弈程序或组件正在运行。请中止该程序后重试！"
+
+!include "base.nsi"

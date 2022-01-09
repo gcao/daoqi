@@ -1,0 +1,1 @@
+jarsigner -keystore daoqiKeystore -storepass abcdefg %1 daoqi
