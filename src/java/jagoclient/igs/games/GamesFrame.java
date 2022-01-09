@@ -167,8 +167,9 @@ public class GamesFrame extends CloseFrame implements CloseListener
 			T.appendLine0(" "+(String)L.first().content());
 			Color FC=Color.green.darker().darker();
 			for (i=0; i<n-1; i++)
-			{	if (CF.getServerType() == Global.IGS && v[i].game().indexOf("dqdq") < 0) continue;
-                T.appendLine0(v[i].game(),v[i].friend()?
+			{
+				//if (CF.getServerType() == Global.IGS && v[i].game().indexOf("dqdq") < 0) continue;
+				T.appendLine0(v[i].game(),v[i].friend()?
 					FC:Color.black);
 			}
 			T.doUpdate(false);

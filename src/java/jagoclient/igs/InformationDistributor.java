@@ -30,12 +30,13 @@ public class InformationDistributor extends Distributor
 	public void allsended ()
 	{	if (S.equals("")) return;
 		if (S.startsWith("Match") && S.indexOf("requested")>0)
-		{	if (CF.getServerType() == Global.IGS && S.indexOf("dqdq") < 0)  // only accept Daoqi request.
-            {   //CF.append("Match request from non-Daoqi user is ignored!");
-                S=""; Lines=0;
-                return;
-            }
-            new MatchDialog(CF,S,Out,this);
+		{
+			//if (CF.getServerType() == Global.IGS && S.indexOf("dqdq") < 0)  // only accept Daoqi request.
+			//{   //CF.append("Match request from non-Daoqi user is ignored!");
+			//    S=""; Lines=0;
+			//    return;
+			//}
+			new MatchDialog(CF,S,Out,this);
 			S=""; Lines=0; return;
 		}
 		if (Global.blocks(S)!=MessageFilter.BLOCK_COMPLETE)

@@ -370,7 +370,8 @@ public class WhoFrame extends CloseFrame
     		T.appendLine0(Global.resourceString("_Info_______Name_______Idle___Rank"));
     		Color FC=Color.green.darker(),CM=Color.red.darker();
 	    	for (i=0; i<n; i++)
-			{	if (CF.getServerType() == Global.IGS && v[i].who().indexOf("dqdq") < 0) continue;
+			{
+				//if (CF.getServerType() == Global.IGS && v[i].who().indexOf("dqdq") < 0) continue;
                 if (!(
 				(Looking.getState() && !v[i].looking()) ||
 				(OmitX.getState() && v[i].silent()) ||
