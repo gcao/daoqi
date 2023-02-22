@@ -1989,6 +1989,9 @@ public class GoFrame extends CloseFrame
             LaterFilename = "Clipboard Content";
             if (XmlReader.testXml(S)) doloadXml(new StringReader(S));
             else doload(new StringReader(S));
+            B.goforward();
+            B.recenter();
+            B.updateboard();
         }
         catch (Exception e) {
         }

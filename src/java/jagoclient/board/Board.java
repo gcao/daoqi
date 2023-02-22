@@ -3749,6 +3749,16 @@ public class Board extends Canvas
 		}
 	}
 
+	public void recenter() {
+		String action = Pos.getaction("B");
+		if (action == null) {
+			action = T.top().getaction("W");
+		}
+		if (action != null) {
+			this.recenter(Field.i(action), Field.j(action));
+		}
+	}
+
 	private void recenter(int i, int j) {
 		switch (rotate % 4) {
 			case 1:
